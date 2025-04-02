@@ -4,15 +4,25 @@ namespace Application
     public class Board
     {
         private int playerPosition = 0;
-
-        public void MovePlayerUp()
+        public enum Direction
         {
-            playerPosition++;
+            Up,
+            Down
         }
 
-        public void MovePlayerDown()
+        public void MovePlayer(Direction direction)
         {
-            playerPosition--;
+            switch (direction)
+            {
+                case Direction.Up:
+                    playerPosition++;
+                    break;
+                case Direction.Down:
+                    playerPosition--;
+                    break;
+
+            }
+
         }
 
         public int GetPlayerPosition()

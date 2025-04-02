@@ -19,12 +19,12 @@ namespace Testing
 
         public void Moving_A_Player_Up()
         {
-            board.MovePlayerUp();
+            board.MovePlayer(Board.Direction.Up);
         }
 
         public void Moving_A_Player_Down()
         {
-            board.MovePlayerDown();
+            board.MovePlayer(Board.Direction.Down);
         }
 
         public void The_Player_Moves_Up()
