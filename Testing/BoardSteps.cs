@@ -42,5 +42,10 @@ namespace Testing
         {
             board.GetPlayerPosition().ShouldBe(0);
         }
+
+        public void The_Player_Can_Not_Move()
+        {
+            board.GetPlayerPosition().ShouldBe(0);
+        }
     }
 }

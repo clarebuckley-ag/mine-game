@@ -18,12 +18,18 @@ namespace Application
                     playerPosition++;
                     break;
                 case Direction.Down:
+                    if (IsPlayerAtStartPosition()) break;
                     playerPosition--;
                     break;
-
             }
 
         }
+
+        private bool IsPlayerAtStartPosition()
+        {
+            return playerPosition == 0;
+        }
+
 
         public int GetPlayerPosition()
         {

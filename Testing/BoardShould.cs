@@ -29,5 +29,13 @@ namespace Testing
             And(Moving_A_Player_Down);
             Then(The_Player_Does_Not_Move);
         }
+
+        [Test]
+        public void Does_Not_Alow_User_To_Move_Off_The_Board()
+        {
+            Given(A_Board);
+            When(Moving_A_Player_Down);
+            Then(The_Player_Can_Not_Move);
+        }
     }
 }
