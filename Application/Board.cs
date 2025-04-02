@@ -10,6 +10,11 @@ namespace Application
             playerPosition++;
         }
 
+        public void MovePlayerDown()
+        {
+            playerPosition--;
+        }
+
         public int GetPlayerPosition()
         {
             return playerPosition;
