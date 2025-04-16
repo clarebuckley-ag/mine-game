@@ -45,5 +45,14 @@ namespace Testing
             When(Moving_A_Player_Right);
             Then(The_Player_Moves_Right);
         }
+
+        [Test]
+        public void Alow_A_Player_To_Move_Left()
+        {
+            Given(A_Board);
+            When(Moving_A_Player_Right);
+            And(Moving_A_Player_Left);
+            Then(The_Player_Moves_Left);
+        }
     }
 }

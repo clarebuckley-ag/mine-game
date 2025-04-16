@@ -33,6 +33,11 @@ namespace Testing
             board.MovePlayer(Board.Direction.Right);
         }
 
+        public void Moving_A_Player_Left()
+        {
+            board.MovePlayer(Board.Direction.Left);
+        }
+
         public void The_Player_Moves_Up()
         {
             board.GetPlayerPosition().Y.ShouldBe(1);
@@ -42,6 +47,12 @@ namespace Testing
         {
             var position = board.GetPlayerPosition();
             position.X.ShouldBe(1);
+        }
+
+        public void The_Player_Moves_Left()
+        {
+            var position = board.GetPlayerPosition();
+            position.X.ShouldBe(0);
         }
 
         public void The_Player_Moves_Up_Twice()

@@ -10,7 +10,8 @@ namespace Application
         {
             Up,
             Down,
-            Right
+            Right,
+            Left
         }
 
         public void MovePlayer(Direction direction)
@@ -27,6 +28,9 @@ namespace Application
                 case Direction.Right:
                     playerPosition = new Position(playerPosition.X + 1, playerPosition.Y);
                     break;
+                case Direction.Left:
+                    playerPosition = new Position(playerPosition.X -1, playerPosition.Y);
+                    break;
             }
         }
 
@@ -34,7 +38,6 @@ namespace Application
         {
             return playerPosition == new Position(0,0);
         }
-
 
         public Position GetPlayerPosition()
         {
