@@ -19,17 +19,17 @@ namespace Application
             switch (direction)
             {
                 case Direction.Up:
-                    playerPosition = new Position(playerPosition.X, playerPosition.Y + 1);
+                    playerPosition = new Position(playerPosition.HorizontalPosition, playerPosition.VerticalPosition + 1);
                     break;
                 case Direction.Down:
                     if (IsPlayerAtStartPosition()) break;
-                    playerPosition = new Position(playerPosition.X, playerPosition.Y - 1);
+                    playerPosition = new Position(playerPosition.HorizontalPosition, playerPosition.VerticalPosition - 1);
                     break;
                 case Direction.Right:
-                    playerPosition = new Position(playerPosition.X + 1, playerPosition.Y);
+                    playerPosition = new Position(playerPosition.HorizontalPosition + 1, playerPosition.VerticalPosition);
                     break;
                 case Direction.Left:
-                    playerPosition = new Position(playerPosition.X -1, playerPosition.Y);
+                    playerPosition = new Position(playerPosition.HorizontalPosition -1, playerPosition.VerticalPosition);
                     break;
             }
         }

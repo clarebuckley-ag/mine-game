@@ -1,6 +1,5 @@
 ﻿
 namespace Domain
 {
-    public record Position(int X, int Y);
-
+    public record Position(int HorizontalPosition, int VerticalPosition);
 }

@@ -54,13 +54,13 @@ namespace Testing
 
         public void The_Player_Moves_Up_Twice()
         {
-            board.GetPlayerPosition().Y.ShouldBe(2);
+            board.GetPlayerPosition().VerticalPosition.ShouldBe(2);
         }
 
         public void The_Player_Does_Not_Move()
         {
-            board.GetPlayerPosition().Y.ShouldBe(0);
-            board.GetPlayerPosition().X.ShouldBe(0);
+            board.GetPlayerPosition().VerticalPosition.ShouldBe(0);
+            board.GetPlayerPosition().HorizontalPosition.ShouldBe(0);
         }
 
     }
