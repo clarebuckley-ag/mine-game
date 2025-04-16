@@ -13,7 +13,7 @@ namespace Testing
         [TestCase(Board.Direction.Right, 2, 1)]
         public void Allow_A_Player_To_Move_In_Any_Direction(Board.Direction direction, int horizontalPosition, int verticalPosition)
         {
-            Given(A_Board_With_Starting_Position_1_1);
+            A_Board_With_Starting_Position(new Position(1, 1));
             When(() => Moving_A_Player(direction));
             Then(() => The_Player_Moves_To(new Position(horizontalPosition,verticalPosition)));
         }
@@ -27,11 +27,14 @@ namespace Testing
             Then(The_Player_Moves_Up_Twice);
         }
 
-        [Test]
-        public void Does_Not_Alow_A_Player_To_Move_Off_The_Board()
+        [TestCase(Board.Direction.Down, 0, 0)]
+        [TestCase(Board.Direction.Left, 0, 0)]
+        [TestCase(Board.Direction.Right, 7, 0)]
+        [TestCase(Board.Direction.Up, 0, 7)]
+        public void Does_Not_Alow_A_Player_To_Move_Off_The_Board(Board.Direction direction, int horizontalPosition, int verticalPosition)
         {
-            Given(A_Board);
-            When(Moving_A_Player_Down);
+            Given(() => A_Board_With_Starting_Position(new Position(horizontalPosition, verticalPosition)));
+            When(() => Moving_A_Player(direction));
             Then(The_Player_Does_Not_Move);
         }
     }

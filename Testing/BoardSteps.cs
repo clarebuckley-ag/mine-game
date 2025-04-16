@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using Application;
+﻿using Application;
 using Domain;
 using Shouldly;
 
@@ -8,10 +7,13 @@ namespace Testing
     internal partial class BoardShould 
     {
         private Board board;
+        private Position startingPosition;
+
         protected override void before_each()
         {
             base.before_each();
             board = null!;
+            startingPosition = null!;
         }
 
         public void A_Board()
@@ -19,9 +21,10 @@ namespace Testing
             board = new Board(new Position(0,0));
         }
 
-        public void A_Board_With_Starting_Position_1_1()
+        public void A_Board_With_Starting_Position(Position startingPosition)
         {
-            board = new Board(new Position(1,1));
+            board = new Board(startingPosition);
+            this.startingPosition = startingPosition;
         }
 
         public void Moving_A_Player(Board.Direction direction)
@@ -49,9 +52,6 @@ namespace Testing
             board.MovePlayer(Board.Direction.Right);
         }
 
-
-
-
         public void The_Player_Moves_Up_Twice()
         {
             board.GetPlayerPosition().VerticalPosition.ShouldBe(2);
@@ -59,8 +59,7 @@ namespace Testing
 
         public void The_Player_Does_Not_Move()
         {
-            board.GetPlayerPosition().VerticalPosition.ShouldBe(0);
-            board.GetPlayerPosition().HorizontalPosition.ShouldBe(0);
+            board.GetPlayerPosition().ShouldBe(this.startingPosition);
         }
 
     }
