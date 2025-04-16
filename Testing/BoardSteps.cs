@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using Application;
+using Domain;
 using Shouldly;
 
 namespace Testing
@@ -15,7 +16,22 @@ namespace Testing
 
         public void A_Board()
         {
-            board = new Board();
+            board = new Board(new Position(0,0));
+        }
+
+        public void A_Board_With_Starting_Position_1_1()
+        {
+            board = new Board(new Position(1,1));
+        }
+
+        public void Moving_A_Player(Board.Direction direction)
+        {
+            board.MovePlayer(direction);
+        }
+
+        public void The_Player_Moves_To(Position position)
+        {
+            board.GetPlayerPosition().ShouldBe(position);
         }
 
         public void Moving_A_Player_Up()
@@ -33,27 +49,8 @@ namespace Testing
             board.MovePlayer(Board.Direction.Right);
         }
 
-        public void Moving_A_Player_Left()
-        {
-            board.MovePlayer(Board.Direction.Left);
-        }
 
-        public void The_Player_Moves_Up()
-        {
-            board.GetPlayerPosition().Y.ShouldBe(1);
-        }
 
-        public void The_Player_Moves_Right()
-        {
-            var position = board.GetPlayerPosition();
-            position.X.ShouldBe(1);
-        }
-
-        public void The_Player_Moves_Left()
-        {
-            var position = board.GetPlayerPosition();
-            position.X.ShouldBe(0);
-        }
 
         public void The_Player_Moves_Up_Twice()
         {

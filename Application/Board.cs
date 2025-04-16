@@ -3,9 +3,9 @@ using Domain;
 
 namespace Application
 {
-    public class Board
+    public class Board(Position startingPosition)
     {
-        private Position playerPosition = new Position(0,0);
+        private Position playerPosition = startingPosition;
         public enum Direction
         {
             Up,
