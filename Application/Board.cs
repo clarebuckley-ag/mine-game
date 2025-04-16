@@ -1,13 +1,16 @@
 ﻿
+using Domain;
+
 namespace Application
 {
     public class Board
     {
-        private int playerPosition = 0;
+        private Position playerPosition = new Position(0,0);
         public enum Direction
         {
             Up,
-            Down
+            Down,
+            Right
         }
 
         public void MovePlayer(Direction direction)
@@ -15,23 +18,25 @@ namespace Application
             switch (direction)
             {
                 case Direction.Up:
-                    playerPosition++;
+                    playerPosition = new Position(playerPosition.X, playerPosition.Y + 1);
                     break;
                 case Direction.Down:
                     if (IsPlayerAtStartPosition()) break;
-                    playerPosition--;
+                    playerPosition = new Position(playerPosition.X, playerPosition.Y - 1);
+                    break;
+                case Direction.Right:
+                    playerPosition = new Position(playerPosition.X + 1, playerPosition.Y);
                     break;
             }
-
         }
 
         private bool IsPlayerAtStartPosition()
         {
-            return playerPosition == 0;
+            return playerPosition == new Position(0,0);
         }
 
 
-        public int GetPlayerPosition()
+        public Position GetPlayerPosition()
         {
             return playerPosition;
         }

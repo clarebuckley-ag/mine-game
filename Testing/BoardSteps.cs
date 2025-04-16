@@ -1,4 +1,5 @@
-﻿using Application;
+﻿using System.Security.Cryptography;
+using Application;
 using Shouldly;
 
 namespace Testing
@@ -27,25 +28,32 @@ namespace Testing
             board.MovePlayer(Board.Direction.Down);
         }
 
+        public void Moving_A_Player_Right()
+        {
+            board.MovePlayer(Board.Direction.Right);
+        }
+
         public void The_Player_Moves_Up()
         {
-            board.GetPlayerPosition().ShouldBe(1);
+            board.GetPlayerPosition().Y.ShouldBe(1);
+        }
+
+        public void The_Player_Moves_Right()
+        {
+            var position = board.GetPlayerPosition();
+            position.X.ShouldBe(1);
         }
 
         public void The_Player_Moves_Up_Twice()
         {
-            board.GetPlayerPosition().ShouldBe(2);
+            board.GetPlayerPosition().Y.ShouldBe(2);
         }
-
 
         public void The_Player_Does_Not_Move()
         {
-            board.GetPlayerPosition().ShouldBe(0);
+            board.GetPlayerPosition().Y.ShouldBe(0);
+            board.GetPlayerPosition().X.ShouldBe(0);
         }
 
-        public void The_Player_Can_Not_Move()
-        {
-            board.GetPlayerPosition().ShouldBe(0);
-        }
     }
 }
