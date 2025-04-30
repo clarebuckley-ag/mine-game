@@ -3,9 +3,12 @@ using Domain;
 
 namespace Application
 {
-    public class Board(Position startingPosition)
+    public class Board(Position startingPosition, BoardDimensions boardDimensions, List<Landmine> landmines)
     {
         private Position playerPosition = startingPosition;
+        private readonly BoardDimensions boardDimensions = boardDimensions;
+        private readonly List<Landmine> landmines = landmines;
+
         public enum Direction
         {
             Up,
@@ -13,7 +16,7 @@ namespace Application
             Right,
             Left
         }
-
+        
         public void MovePlayer(Direction direction)
         {
             switch (direction)
@@ -57,6 +60,11 @@ namespace Application
         public Position GetPlayerPosition()
         {
             return playerPosition;
+        }
+
+        public bool HasPlayerLostALife()
+        {
+            return landmines.Any(x => x.Position.Equals(playerPosition));
         }
     }
 }

@@ -18,13 +18,18 @@ namespace Testing
 
         public void A_Board()
         {
-            board = new Board(new Position(0,0));
+            board = new Board(new Position(0,0), new BoardDimensions(8,8), []);
         }
 
         public void A_Board_With_Starting_Position(Position startingPosition)
         {
-            board = new Board(startingPosition);
+            board = new Board(startingPosition, new BoardDimensions(8, 8), []);
             this.startingPosition = startingPosition;
+        }
+
+        public void A_Board_With_Landmines()
+        {
+            board = new Board(new Position(0, 0), new BoardDimensions(8, 8), [new Landmine(new Position(0,1))]);
         }
 
         public void Moving_A_Player(Board.Direction direction)
@@ -62,5 +67,9 @@ namespace Testing
             board.GetPlayerPosition().ShouldBe(this.startingPosition);
         }
 
+        public void The_Player_Loses_A_Life()
+        {
+            board.HasPlayerLostALife().ShouldBeTrue();
+        }
     }
 }
