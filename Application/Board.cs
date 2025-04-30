@@ -45,13 +45,13 @@ namespace Application
             switch (direction)
             {
                 case Direction.Up:
-                    return playerPosition.VerticalPosition >= 7;
+                    return playerPosition.VerticalPosition >= boardDimensions.Height -1;
                 case Direction.Down:
                     return playerPosition.VerticalPosition < 1;
                 case Direction.Left:
                     return playerPosition.HorizontalPosition < 1;
                 case Direction.Right:
-                    return playerPosition.HorizontalPosition >= 7;
+                    return playerPosition.HorizontalPosition >= boardDimensions.Width - 1;
                 default:
                     return false;
             }
