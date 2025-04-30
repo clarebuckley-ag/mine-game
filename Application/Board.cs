@@ -8,6 +8,7 @@ namespace Application
         private Position playerPosition = startingPosition;
         private readonly BoardDimensions boardDimensions = boardDimensions;
         private readonly List<Landmine> landmines = landmines;
+        private int detonations = 0;
 
         public enum Direction
         {
@@ -38,6 +39,21 @@ namespace Application
                     playerPosition = new Position(playerPosition.HorizontalPosition - 1, playerPosition.VerticalPosition);
                     break;
             }
+
+            DetonateLandmine();
+        }
+
+        public void DetonateLandmine()
+        {
+            Landmine landmine = landmines.FirstOrDefault(x => x.Position.Equals(playerPosition) && !x.HasDetonated);
+            if (landmine == null) return;
+            landmine.HasDetonated = true;
+            detonations++;
+        }
+
+        public int GetDetonations()
+        {
+            return detonations;
         }
 
         private bool WillPlayerMoveOutOfBounds(Direction direction)
@@ -62,9 +78,5 @@ namespace Application
             return playerPosition;
         }
 
-        public bool HasPlayerLostALife()
-        {
-            return landmines.Any(x => x.Position.Equals(playerPosition));
-        }
     }
 }

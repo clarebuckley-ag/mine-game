@@ -43,7 +43,17 @@ namespace Testing
         {
             Given(A_Board_With_Landmines);
             When(Moving_A_Player_Up);
-            And(The_Player_Loses_A_Life);
+            Then(() => A_Landmine_Has_Detonated(1));
+        }
+
+        [Test]
+        public void Only_Detonates_A_Landmine_Once()
+        {
+            Given(A_Board_With_Landmines);
+            When(Moving_A_Player_Up);
+            And(Moving_A_Player_Down);
+            And(Moving_A_Player_Up);
+            Then(() => A_Landmine_Has_Detonated(1));
         }
 
 

@@ -67,9 +67,9 @@ namespace Testing
             board.GetPlayerPosition().ShouldBe(this.startingPosition);
         }
 
-        public void The_Player_Loses_A_Life()
+        public void A_Landmine_Has_Detonated(int expectedDetonations)
         {
-            board.HasPlayerLostALife().ShouldBeTrue();
+            board.GetDetonations().ShouldBe(expectedDetonations);
         }
     }
 }
