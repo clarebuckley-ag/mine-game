@@ -45,9 +45,9 @@ namespace Application
 
         public void DetonateLandmine()
         {
-            Landmine landmine = landmines.FirstOrDefault(x => x.Position.Equals(playerPosition) && !x.HasDetonated);
+            Landmine landmine = landmines.FirstOrDefault(x => x.Position.Equals(playerPosition) && !x.HasDetonated());
             if (landmine == null) return;
-            landmine.HasDetonated = true;
+            landmine.Detonate();
             detonations++;
         }
 
