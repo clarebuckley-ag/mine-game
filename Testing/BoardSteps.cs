@@ -27,9 +27,19 @@ namespace Testing
             this.startingPosition = startingPosition;
         }
 
+        public void A_Board_With_Three_Landmines()
+        {
+            List<Landmine> landmines = [
+                new Landmine(new Position(0, 1)),
+                new Landmine(new Position(1, 1)),
+                new Landmine(new Position(1, 0)),
+             ];
+            board = new Board(new Position(0, 0), new BoardDimensions(8, 8), landmines);
+        }
+
         public void A_Board_With_Landmines()
         {
-            board = new Board(new Position(0, 0), new BoardDimensions(8, 8), [new Landmine(new Position(0,1))]);
+            board = new Board(new Position(0, 0), new BoardDimensions(8, 8), [new Landmine(new Position(0, 1))]);
         }
 
         public void Moving_A_Player(Board.Direction direction)
@@ -70,6 +80,11 @@ namespace Testing
         public void A_Landmine_Has_Detonated(int expectedDetonations)
         {
             board.GetDetonations().ShouldBe(expectedDetonations);
+        }
+
+        public void A_Player_Has_Died()
+        {
+            board.IsPlayerAlive().ShouldBeFalse();
         }
     }
 }

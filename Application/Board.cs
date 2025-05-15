@@ -5,7 +5,7 @@ namespace Application
 {
     public class Board(Position startingPosition, BoardDimensions boardDimensions, List<Landmine> landmines)
     {
-        private Position playerPosition = startingPosition;
+        private Player player = new Player(startingPosition);
         private readonly BoardDimensions boardDimensions = boardDimensions;
         private readonly List<Landmine> landmines = landmines;
         private int detonations = 0;
@@ -24,19 +24,19 @@ namespace Application
             {
                 case Direction.Up:
                     if (WillPlayerMoveOutOfBounds(Direction.Up)) break;
-                    playerPosition = new Position(playerPosition.HorizontalPosition, playerPosition.VerticalPosition + 1);
+                    player.SetPosition(new Position(player.GetPosition().HorizontalPosition, player.GetPosition().VerticalPosition + 1));
                     break;
                 case Direction.Down:
                     if (WillPlayerMoveOutOfBounds(Direction.Down)) break;
-                    playerPosition = new Position(playerPosition.HorizontalPosition, playerPosition.VerticalPosition - 1);
+                    player.SetPosition(new Position(player.GetPosition().HorizontalPosition, player.GetPosition().VerticalPosition - 1));
                     break;
                 case Direction.Right:
                     if (WillPlayerMoveOutOfBounds(Direction.Right)) break;
-                    playerPosition = new Position(playerPosition.HorizontalPosition + 1, playerPosition.VerticalPosition);
+                    player.SetPosition(new Position(player.GetPosition().HorizontalPosition + 1, player.GetPosition().VerticalPosition));
                     break;
                 case Direction.Left:
                     if (WillPlayerMoveOutOfBounds(Direction.Left)) break;
-                    playerPosition = new Position(playerPosition.HorizontalPosition - 1, playerPosition.VerticalPosition);
+                    player.SetPosition(new Position(player.GetPosition().HorizontalPosition - 1, player.GetPosition().VerticalPosition));
                     break;
             }
 
@@ -45,15 +45,19 @@ namespace Application
 
         public void DetonateLandmine()
         {
-            Landmine landmine = landmines.FirstOrDefault(x => x.Position.Equals(playerPosition) && !x.HasDetonated());
+            Landmine landmine = landmines.FirstOrDefault(x => x.Position.Equals(player.GetPosition()) && !x.HasDetonated());
             if (landmine == null) return;
-            landmine.Detonate();
-            detonations++;
+            player.StepOnLandmine(landmine);
         }
 
         public int GetDetonations()
         {
-            return detonations;
+            return landmines.Where(x => x.HasDetonated()).Count();
+        }
+
+        public bool IsPlayerAlive()
+        {
+            return player.IsAlive();
         }
 
         private bool WillPlayerMoveOutOfBounds(Direction direction)
@@ -61,13 +65,13 @@ namespace Application
             switch (direction)
             {
                 case Direction.Up:
-                    return playerPosition.VerticalPosition >= boardDimensions.Height -1;
+                    return player.GetPosition().VerticalPosition >= boardDimensions.Height -1;
                 case Direction.Down:
-                    return playerPosition.VerticalPosition < 1;
+                    return player.GetPosition().VerticalPosition < 1;
                 case Direction.Left:
-                    return playerPosition.HorizontalPosition < 1;
+                    return player.GetPosition().HorizontalPosition < 1;
                 case Direction.Right:
-                    return playerPosition.HorizontalPosition >= boardDimensions.Width - 1;
+                    return player.GetPosition().HorizontalPosition >= boardDimensions.Width - 1;
                 default:
                     return false;
             }
@@ -75,7 +79,7 @@ namespace Application
 
         public Position GetPlayerPosition()
         {
-            return playerPosition;
+            return player.GetPosition();
         }
 
     }

@@ -56,6 +56,17 @@ namespace Testing
             Then(() => A_Landmine_Has_Detonated(1));
         }
 
+        [Test]
+        public void Allows_A_Player_To_Die()
+        {
+            Given(A_Board_With_Three_Landmines);
+            When(Moving_A_Player_Up);
+            And(Moving_A_Player_Right);
+            And(Moving_A_Player_Down);
+            Then(() => A_Landmine_Has_Detonated(3));
+            And(A_Player_Has_Died);
+        }
+
 
     }
 }
