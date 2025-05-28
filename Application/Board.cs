@@ -20,6 +20,10 @@ namespace Application
         
         public void MovePlayer(Direction direction)
         {
+            if (!IsPlayerAlive())
+            {
+                return;
+            }
             switch (direction)
             {
                 case Direction.Up:

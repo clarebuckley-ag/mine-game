@@ -67,6 +67,12 @@ namespace Testing
             And(A_Player_Has_Died);
         }
 
-
+        [Test]
+        public void Does_Not_Allow_Further_Play_After_Player_Death()
+        {
+            Given(A_Board_With_A_Dead_Player);
+            When(Moving_A_Player_Right);
+            Then(The_Player_Can_Not_Move);
+        }
     }
 }

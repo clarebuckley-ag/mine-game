@@ -1,4 +1,5 @@
-﻿using Application;
+﻿using System.Security.Cryptography;
+using Application;
 using Domain;
 using Shouldly;
 
@@ -8,12 +9,14 @@ namespace Testing
     {
         private Board board;
         private Position startingPosition;
+        private Position playerPosition;
 
         protected override void before_each()
         {
             base.before_each();
             board = null!;
             startingPosition = null!;
+            playerPosition = null;
         }
 
         public void A_Board()
@@ -40,6 +43,17 @@ namespace Testing
         public void A_Board_With_Landmines()
         {
             board = new Board(new Position(0, 0), new BoardDimensions(8, 8), [new Landmine(new Position(0, 1))]);
+        }
+
+        public void A_Board_With_A_Dead_Player()
+        {
+            A_Board_With_Three_Landmines();
+            Moving_A_Player_Up();
+            Moving_A_Player_Right();
+            Moving_A_Player_Down();
+            A_Landmine_Has_Detonated(3);
+            playerPosition = board.GetPlayerPosition();
+            A_Player_Has_Died();
         }
 
         public void Moving_A_Player(Board.Direction direction)
@@ -85,6 +99,11 @@ namespace Testing
         public void A_Player_Has_Died()
         {
             board.IsPlayerAlive().ShouldBeFalse();
+        }
+
+        public void The_Player_Can_Not_Move()
+        {
+            board.GetPlayerPosition().ShouldBe(playerPosition);
         }
     }
 }
