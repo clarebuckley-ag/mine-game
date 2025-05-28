@@ -19,7 +19,7 @@ namespace Testing
             playerPosition = null;
         }
 
-        public void A_Board()
+        public void A_Board_With_No_Landmines()
         {
             board = new Board(new Position(0,0), new BoardDimensions(8,8), []);
         }
@@ -71,6 +71,14 @@ namespace Testing
             board.MovePlayer(Board.Direction.Up);
         }
 
+        public void Moving_A_Player_To_The_Top_Of_The_Board()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                board.MovePlayer(Board.Direction.Up);
+            }
+        }
+
         public void Moving_A_Player_Down()
         {
             board.MovePlayer(Board.Direction.Down);
@@ -105,5 +113,12 @@ namespace Testing
         {
             board.GetPlayerPosition().ShouldBe(playerPosition);
         }
+        
+
+        public void The_Player_Wins_The_Game()
+        {
+            board.HasWonGame().ShouldBeTrue();
+        }
+
     }
 }

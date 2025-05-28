@@ -8,7 +8,7 @@ namespace Application
         private Player player = new Player(startingPosition);
         private readonly BoardDimensions boardDimensions = boardDimensions;
         private readonly List<Landmine> landmines = landmines;
-        private int detonations = 0;
+        private bool hasWon = false;
 
         public enum Direction
         {
@@ -45,6 +45,7 @@ namespace Application
             }
 
             DetonateLandmine();
+            CheckWinCondition();
         }
 
         public void DetonateLandmine()
@@ -52,6 +53,14 @@ namespace Application
             Landmine landmine = landmines.FirstOrDefault(x => x.Position.Equals(player.GetPosition()) && !x.HasDetonated());
             if (landmine == null) return;
             player.StepOnLandmine(landmine);
+        }
+
+        public void CheckWinCondition()
+        {
+            if (!IsPlayerAlive()) return;
+            if (GetPlayerPosition().VerticalPosition == boardDimensions.Height - 1) {
+                hasWon = true;
+            };
         }
 
         public int GetDetonations()
@@ -62,6 +71,11 @@ namespace Application
         public bool IsPlayerAlive()
         {
             return player.IsAlive();
+        }
+
+        public bool HasWonGame()
+        {
+           return hasWon;
         }
 
         private bool WillPlayerMoveOutOfBounds(Direction direction)

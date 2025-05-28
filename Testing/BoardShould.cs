@@ -21,7 +21,7 @@ namespace Testing
         [Test]
         public void Allow_A_Player_To_Move_Up_Twice()
         {
-            Given(A_Board);
+            Given(A_Board_With_No_Landmines);
             When(Moving_A_Player_Up);
             And(Moving_A_Player_Up);
             Then(The_Player_Moves_Up_Twice);
@@ -73,6 +73,14 @@ namespace Testing
             Given(A_Board_With_A_Dead_Player);
             When(Moving_A_Player_Right);
             Then(The_Player_Can_Not_Move);
+        }
+
+        [Test]
+        public void Allow_A_Player_To_Win_The_Game()
+        {
+            Given(A_Board_With_No_Landmines);
+            When(Moving_A_Player_To_The_Top_Of_The_Board);
+            Then(The_Player_Wins_The_Game);
         }
     }
 }
